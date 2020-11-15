@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . weather_app.py /app/
 
 # Step 3:
-RUN pip install --upgrade pip==x.x.x &&\
+RUN pip install --upgrade pip &&\
     pip install -r requirements.txt
 #hadolint ignore=DL3013
 

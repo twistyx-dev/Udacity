@@ -1,3 +1,5 @@
+##A simple Flask application that uses Openweathermap API to show weather.
+##Source for the app: https://github.com/sagunsh/weather-app
 
 import requests
 from flask import Flask, request
