@@ -4,7 +4,7 @@ FROM python:3.7.3-stretch
 WORKDIR /app
 
 # Step 2:
-COPY . app.py /app/
+COPY . main.go /app/
 
 # Step 3:
 RUN pip install --upgrade pip &&\
@@ -14,4 +14,4 @@ RUN pip install --upgrade pip &&\
 EXPOSE 80
 
 ## Step 5:
-CMD ["python", "app.py"]
+CMD ["go", "main.go"]

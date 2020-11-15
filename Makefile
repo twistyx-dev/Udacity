@@ -17,8 +17,8 @@ lint:
 	# See local hadolint install instructions:   https://github.com/hadolint/hadolint
 	# This is linter for Dockerfiles
 	hadolint Dockerfile
-	# This is a linter for Python source code linter: https://www.pylint.org/
+	# This is a linter for go source code: http://coala.rtfd.org//
 	# This should be run from inside a virtualenv
-	pylint --disable=R,C,W1203 app.py
+	golint main.go
 
 all: install lint test
