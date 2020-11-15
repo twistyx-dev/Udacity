@@ -5,7 +5,7 @@ setup:
 		source ~/.capstone/bin/activate
 
 install:
-	pip install --upgrade pip &&\
+	pip install --upgrade pip==x.x.x &&\
 		pip install -r requirements.txt
 
 test:
@@ -17,8 +17,8 @@ lint:
 	# See local hadolint install instructions:   https://github.com/hadolint/hadolint
 	# This is linter for Dockerfiles
 	hadolint Dockerfile
-	# This is a linter for go source code: http://coala.rtfd.org//
+	# This is a linter for go source code: https://www.pylint.org/
 	# This should be run from inside a virtualenv
-	golint main.go
+	pylint --disable=R,C,W1203 weather_app.py
 
 all: install lint test
