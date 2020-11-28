@@ -3,7 +3,7 @@
 # This tags and uploads an image to Docker Hub
 
 # Step 1:
-dockerpath=twi5tyx/devOps-capstone:weather
+dockerpath=twi5tyx/udacity-capstone:weather
 
 # Step 2:
 kubectl run DevOps-Capstone --image=$dockerpath --port=8000
