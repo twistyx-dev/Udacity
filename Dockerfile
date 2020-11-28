@@ -11,7 +11,6 @@ COPY . weather_app.py /app/
 RUN pip install --upgrade pip &&\
     pip install -r requirements.txt
 
-
 # Step 4:
 EXPOSE 80
 
