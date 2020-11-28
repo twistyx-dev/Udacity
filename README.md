@@ -1,6 +1,8 @@
 # DevOps-Capstone
 # ReadMe File for my Udacity DevOps CapStone Project
 
+This will serve you up a weather app.
+
 ###########################################################
 # ████████ ██     ██ ██ ███████ ████████ ██    ██ ██   ██ 
 #    ██    ██     ██ ██ ██         ██     ██  ██   ██ ██  
