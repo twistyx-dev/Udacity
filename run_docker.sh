@@ -3,8 +3,8 @@
 ## Complete the following steps to get Docker running locally
 
 # Step 1:
-docker build --tag=twi5tyx/udacity-project-5:predict .
+docker build --tag=twi5tyx/capstone:helloworld .
 # Step 2:
 docker image ls
 # Step 3:
-docker run -p 8000:80 twi5tyx/udacity-project-5:predict
+docker run -p 8000:80 twi5tyx/capstone:helloworld

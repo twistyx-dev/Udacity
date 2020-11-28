@@ -1,7 +1,7 @@
 ## The Makefile includes instructions on environment setup and lint tests
 setup:
-	python3 -m venv ~/.devops
-		source ~/.devops/bin/activate
+	python3 -m venv ~/.capstone
+		source ~/.capstone/bin/activate
 
 install:
 	# This should be run from inside a virtualenv

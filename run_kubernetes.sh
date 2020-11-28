@@ -4,13 +4,13 @@
 
 # Step 1:
 # This is your Docker ID/path
-dockerpath=twi5tyx/project-5:predict
+dockerpath=twi5tyx/capstone:helloworld
 # Step 2
 # Run the Docker Hub container with kubernetes
-kubectl run project-5 --image=$dockerpath --port=8000
+kubectl run capstone --image=$dockerpath --port=8000
 # Step 3:
 # List kubernetes pods
 kubectl get pods
 # Step 4:
 # Forward the container port to a host
-kubectl port-forward pods/project-5 8000:80 
+kubectl port-forward pods/capstone 8000:80
