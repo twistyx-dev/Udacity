@@ -4,7 +4,7 @@ FROM python:3.7.3-stretch
 WORKDIR /app
 
 # Step 2:
-COPY . weather.py /app/
+COPY . helloworld.py /app/
 
 # Step 3:
 # hadolint ignore=DL3013
@@ -15,4 +15,4 @@ RUN pip install --upgrade pip &&\
 EXPOSE 80
 
 ## Step 5:
-CMD ["python", "weather.py"]
+CMD ["python", "helloworld.py"]

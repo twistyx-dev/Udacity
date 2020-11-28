@@ -1,5 +1,3 @@
-npm
-Flask==1.1.1
-requests
-json
+flask
+flask_restful
 pylint

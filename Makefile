@@ -19,6 +19,6 @@ lint:
 	hadolint Dockerfile
 	# This is a linter for go source code: https://www.pylint.org/
 	# This should be run from inside a virtualenv
-	pylint --disable=R,C,W1203 weather_app.py
+	pylint --disable=R,C,W1203 helloworld.py
 
 all: install lint test
