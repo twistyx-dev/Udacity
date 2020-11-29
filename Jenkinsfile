@@ -8,6 +8,7 @@ pipeline {
           sh '''
           docker build --tag=twi5tyx/capstone .
           '''
+          }
         }
       }
       stage('Test') {
