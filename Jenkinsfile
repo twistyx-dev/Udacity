@@ -4,7 +4,7 @@ pipeline {
         stage('Lint') {
             steps {
                 echo 'Linting...'
-                sh 'hadolint --ignore DL3013 $WORKSPACE/Dockerfile'
+                sh 'make setup'
             }
         }
         stage('Build Docker') {
