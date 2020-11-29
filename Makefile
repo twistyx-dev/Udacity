@@ -27,7 +27,7 @@ lint:
 	hadolint --ignore=DL3013 Dockerfile
 	# This is a linter for Python source code linter: https://www.pylint.org/
 	# This should be run from inside a virtualenvi
-	. devops/bin/activate &&\
+	. capstone/bin/activate &&\
         pylint --disable=R,C,W1203 app.py
 
 all: setup install lint
