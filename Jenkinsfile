@@ -11,7 +11,7 @@ pipeline {
         stage('Lint') {
             steps {
                 echo 'Linting...'
-                sh '''docker run --rm -i hadolint/hadolint < Dockerfile'''
+                sh '''pylint --disable=R,C,W1203 app.py'''
             }
         }
         stage('Build') {
@@ -19,7 +19,7 @@ pipeline {
                 echo 'Building...'
                 script {
                     dockerImage = docker.build('${dockerHub}/${dockerImage}:${dockerVersion}')
-                    docker.withRegistry('', 'docker-hub-creds') {
+                    docker.withRegistry('', 'dockerhub') {
                         dockerImage.push()
                     }
                 }
@@ -28,7 +28,7 @@ pipeline {
         stage('Deploy')  {
             steps {
                 echo 'Deploying...'
-                withAWS(credentials: 'aws-creds', region: eksRegion) {
+                withAWS(credentials: 'capstone-credentials', region: eksRegion) {
                     sh 'aws eks --region=${eksRegion} update-kubeconfig --name ${eksClusterName}'
                 }
             }
