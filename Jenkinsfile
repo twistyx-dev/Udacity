@@ -7,11 +7,11 @@ pipeline {
         dockerVersion = '0.3'
     }
     agent any
-    #stages {
+    stages {
         stage('Lint') {
             steps {
                 echo 'Linting...'
-                sh '''docker run --rm -i hadolint/hadolint:latest-alpine < Dockerfile'''
+                sh '''docker run --rm -i hadolint/hadolint < Dockerfile'''
             }
         }
         stage('Build') {
