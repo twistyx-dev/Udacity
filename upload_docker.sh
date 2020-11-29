@@ -5,10 +5,10 @@
 
 # Step 1:
 # Create dockerpath
-dockerpath=twi5tyx/capstone:helloworld
+dockerpath=twi5tyx/project-5
 # Step 2:
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 # Step 3:
 # Push image to a docker repository
-docker push twi5tyx/capstone:helloworld
+docker push twi5tyx/project-5
