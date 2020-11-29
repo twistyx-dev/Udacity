@@ -45,9 +45,9 @@ pipeline {
             }
 
         }
-  environment {
-    registry = 'twi5tyx/capstone'
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
+        environment {
+            registry = 'twi5tyx/capstone'
+            registryCredential = 'dockerhub'
+            dockerImage = ''
+        }
 }
