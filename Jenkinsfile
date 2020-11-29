@@ -19,7 +19,7 @@ pipeline {
                 steps {
                     echo 'Building...'
                     script {
-                        dockerImage = docker.build registry + ":predict"
+                        dockerImage = docker.build registry + ":latest"
                     }
                 }
             }
