@@ -2,9 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Cloning Git') {
-        steps {
-            git 'https://github.com/twistyx-dev/DevOps-Capstone.git'
-        }
+            steps {
+                git 'https://github.com/twistyx-dev/DevOps-Capstone.git'
+            }
         }
         stage('Lint') {
             steps {
