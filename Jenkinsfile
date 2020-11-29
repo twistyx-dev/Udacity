@@ -1,42 +1,53 @@
 pipeline {
     agent any
-    stages {
-        stage('Lint') {
-            steps {
-                echo 'Linting...'
-                sh 'make setup'
-            }
-        }
-        stage('Build Docker') {
-            steps {
-                echo 'Building...'
-                sh 'make build'
-            }
-        }
-        stage('Login to dockerhub') {
-            steps {
-                echo 'Logging into DockerHub...'
-                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u twi5tyx -p ${dockerhubpwd}'
+        stages {
+            stage('Install dependencies') {
+                steps {
+                    sh '''make setup
+                          make install
+                    '''
                 }
             }
-        }
-        stage('Upload Image') {
-            steps {
-                echo 'Uploading Image to DockerHub...'
-                sh 'make upload'
+            stage('Linting') {
+                steps {
+                    sh 'make lint'
+                }
             }
-        }
-        stage('Remove Image from Jenkins') {
-            steps {
-                echo 'Removing Image from Jenkins'
-                sh "docker rmi twi5tyx/capstone:predict"
+            stage('Build') {
+                steps {
+                    script {
+                        dockerImage = docker.build registry + ":greenv1"
+                    }
+                }
             }
-        }
-        stage('Deploy Kubernetes') {
-            steps {
-                sh 'kubectl apply -f ./kubernetes'
+            stage('Upload to dockerhub') {
+                steps {
+                    script {
+                        docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                        }
+                    }
+
+                }
             }
+            stage('Deployment') {
+                steps {
+                    sh 'aws eks --region ap-south-1 update-kubeconfig --name Capstone'
+                    sh 'kubectl apply -f Deployment/Deployment.yml'
+                    sh 'kubectl get all'
+                }
+            }
+            stage('Cleaning up') {
+                steps {
+                    echo 'Cleaning up...'
+                    sh 'docker system prune'
+                }
+            }
+
         }
-    }
+  environment {
+    registry = 'twi5tyx/capstone'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
 }
