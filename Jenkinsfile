@@ -38,7 +38,7 @@ pipeline {
                 steps {
                     echo 'Deploying...'
                     sh 'aws eks --region us-west-1 update-kubeconfig --name capstone'
-                    sh 'kubectl apply -f $WORKSPACE/Deploy/Deployment.yml'
+                    sh 'kubectl apply -f deploy/deployment.yml'
                     sh 'kubectl get all'
                 }
             }
