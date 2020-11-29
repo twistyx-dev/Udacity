@@ -11,7 +11,7 @@ pipeline {
         stage('Lint') {
             steps {
                 echo 'Linting...'
-                sh '''docker run --rm -i hadolint/hadolint < Dockerfile'''
+                sh '''docker run --rm -i hadolint/hadolint:latest-alpine < Dockerfile'''
             }
         }
         stage('Build') {
