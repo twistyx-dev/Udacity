@@ -4,18 +4,21 @@ pipeline {
    stages {
       stage('Build') {
         steps {
-            echo 'Building..'
+          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
+          sh '''
+          docker build --tag=twi5tyx/capstone .
+          '''
         }
-    }
-    stage('Test') {
+      }
+      stage('Test') {
         steps {
             echo 'Testing..'
         }
-    }
-    stage('Deploy') {
+      }
+      stage('Deploy') {
         steps {
             echo 'Deploying....'
         }
-     }
-  }
+      }
+    }
 }
