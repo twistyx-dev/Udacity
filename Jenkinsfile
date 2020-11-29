@@ -1,19 +1,17 @@
 pipeline {
-
   agent any
-
   stages {
-    stage(‘Linting') {
-}
-    stage('Build blue image') {
-}
-    stage(Push blue image') {
-}
-    stage('create the kubeconfig file') {
-}
-    stage('Deploy blue container') {
-}
-    stage('Redirect service to blue container') {
-}
-}
+    stage(‘Lint python’) {
+      steps {
+        sh ‘pylint -q -e *.py’
+      }
+    }
+    stage('Upload to AWS') {
+      steps {
+        withAWS(region:’us-west-1’,credentials:’jenkins’) {
+            s3Upload(pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:’index.html’, bucket:’c3pipelines’)
+        }
+      }
+    }
+  }
 }
