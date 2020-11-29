@@ -7,7 +7,7 @@ pipeline {
         dockerVersion = '0.3'
     }
     agent any
-    stages {
+    #stages {
         stage('Lint') {
             steps {
                 echo 'Linting...'
