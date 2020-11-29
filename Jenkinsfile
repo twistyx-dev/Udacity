@@ -3,7 +3,7 @@ pipeline {
         stages {
             stage('Setup Environment') {
                 steps {
-                    echo 'Setting Up Environment'
+                    echo 'Setting Up Environment...'
                     sh '''make setup
                           make install
                     '''
