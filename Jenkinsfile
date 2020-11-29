@@ -1,33 +1,37 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
+    environment {
+        eksClusterName = 'capstone-cluster'
+        eksRegion = 'us-west-1'
+        dockerHub = 'twi5tyx'
+        dockerImage = 'capstone'
+        dockerVersion = '0.3'
     }
-  }
-  stages {
-    stage('Lint') {
-      steps {
-        echo 'Linting..'
-      }
+    agent any
+    stages {
+        stage('Lint') {
+            steps {
+                echo 'Linting...'
+                sh '''docker run --rm -i hadolint/hadolint < Dockerfile'''
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                script {
+                    dockerImage = docker.build('${dockerHub}/${dockerImage}:${dockerVersion}')
+                    docker.withRegistry('', 'docker-hub-creds') {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Deploy')  {
+            steps {
+                echo 'Deploying...'
+                withAWS(credentials: 'aws-creds', region: eksRegion) {
+                    sh 'aws eks --region=${eksRegion} update-kubeconfig --name ${eksClusterName}'
+                }
+            }
+        }
     }
-  }
-  stages {
-    stage('Build') {
-      steps {
-        echo 'Building..'
-      }
-    }
-  }
-  stage('Test') {
-    steps {
-      echo 'Testing..'
-      }
-    }
-  }
-  stage('Deploy') {
-    steps {
-      echo 'Deploying....'
-      }
-    }
-  }
 }
