@@ -16,7 +16,7 @@ pipeline {
             stage('Build') {
                 steps {
                     script {
-                        dockerImage = docker.build registry + ":greenv1"
+                        dockerImage = docker.build registry + ":predict"
                     }
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
             }
             stage('Deployment') {
                 steps {
-                    sh 'aws eks --region ap-south-1 update-kubeconfig --name Capstone'
+                    sh 'aws eks --region ap-south-1 update-kubeconfig --name capstone'
                     sh 'kubectl apply -f Deployment/Deployment.yml'
                     sh 'kubectl get all'
                 }

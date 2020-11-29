@@ -4,13 +4,13 @@
   metadata:
     name: capstone
     labels:
-      app: capstone-mlapp
+      app: capstone
     namespace: default
   spec:
     replicas: 2
     selector:
       matchLabels:
-        app: capstone-mlapp
+        app: capstone
     strategy:
       rollingUpdate:
         maxSurge: 25%
@@ -19,12 +19,12 @@
     template:
       metadata:
         labels:
-          app: capstone-mlapp
+          app: capstone
       spec:
         containers:
-        - image: monkbilal/capstone_mlapp:greenv1
+        - image: twi5tyx/capstone:predict
           imagePullPolicy: Always
-          name: capstone-mlapp
+          name: capstone
           ports:
           - containerPort: 80
             protocol: TCP
@@ -40,24 +40,12 @@
   apiVersion: v1
   kind: Service
   metadata:
-    name: capstone-mlapp-service
+    name: capstone-service
   spec:
     selector:
-      app: capstone-mlapp
+      app: capstone
     type: LoadBalancer
     ports:
      - protocol: TCP
        targetPort: 80
        port: 80
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
