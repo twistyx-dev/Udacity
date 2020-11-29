@@ -1,16 +1,21 @@
 pipeline {
-    agent any
-    stages {
-      stage(‘Lint HTML’) {
+   agent any
+
+   stages {
+      stage('Build') {
         steps {
-          sh ‘tidy -q -e *.html’
+            echo 'Building..'
         }
-      stage(‘Upload to AWS’) {
-        steps {
-          withAWS(region:’us-east-1’,credentials:’blueocean’) {
-            s3Upload(pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:’index.html’, bucket:’c3pipelines’)
-          }
-        }
-      }
     }
+    stage('Test') {
+        steps {
+            echo 'Testing..'
+        }
+    }
+    stage('Deploy') {
+        steps {
+            echo 'Deploying....'
+        }
+     }
+  }
 }
