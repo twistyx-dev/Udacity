@@ -9,7 +9,7 @@ pipeline {
                     '''
                 }
             }
-            stage('Linting') {
+            stage('Lint') {
                 steps {
                     echo 'Linting...'
                     sh 'make lint'
@@ -23,9 +23,9 @@ pipeline {
                     }
                 }
             }
-            stage('Upload to dockerhub') {
+            stage('Upload') {
                 steps {
-                    echo 'Uploading to Docker...'
+                    echo 'Uploading to DockerHub...'
                     script {
                         docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
@@ -34,7 +34,7 @@ pipeline {
 
                 }
             }
-            stage('Deployment') {
+            stage('Deploy') {
                 steps {
                     echo 'Deploying...'
                     sh 'aws eks --region ap-south-1 update-kubeconfig --name capstone'
@@ -42,7 +42,7 @@ pipeline {
                     sh 'kubectl get all'
                 }
             }
-            stage('Cleaning up') {
+            stage('Cleaning Up') {
                 steps {
                     echo 'Cleaning up...'
                     sh 'docker system prune'
