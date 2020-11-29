@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Cloning Git') {
             steps {
-                git 'https://github.com/twistyx-dev/DevOps-Capstone.git'
+                git clone 'https://github.com/twistyx-dev/DevOps-Capstone.git'
             }
         }
         stage('Lint') {
