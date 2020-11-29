@@ -37,7 +37,7 @@ pipeline {
             stage('Deploy') {
                 steps {
                     echo 'Deploying...'
-                    sh 'aws eks --region ap-south-1 update-kubeconfig --name capstone'
+                    sh 'aws eks --region us-west-1 update-kubeconfig --name capstone'
                     sh 'kubectl apply -f Deployment/Deployment.yml'
                     sh 'kubectl get all'
                 }

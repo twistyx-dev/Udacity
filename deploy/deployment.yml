@@ -22,7 +22,7 @@
           app: capstone
       spec:
         containers:
-        - image: twi5tyx/capstone:predict
+        - image: twi5tyx/capstone:latest
           imagePullPolicy: Always
           name: capstone
           ports:
