@@ -1,36 +1,31 @@
 pipeline {
-    environment {
-        eksClusterName = 'capstone-cluster'
-        eksRegion = 'us-west-1'
-        dockerHub = 'twi5tyx'
-        dockerImage = 'capstone'
-        dockerVersion = '0.3'
-    }
     agent any
     stages {
         stage('Lint') {
             steps {
-                echo 'Linting...'
-                sh '''pylint --disable=R,C,W1203 app.py'''
+                sh 'make lint'
             }
         }
-        stage('Build') {
+        stage('Build Docker') {
             steps {
-                echo 'Building...'
-                script {
-                    dockerImage = docker.build('${dockerHub}/${dockerImage}:${dockerVersion}')
-                    docker.withRegistry('', 'dockerhub') {
-                        dockerImage.push()
-                    }
+                sh 'make build'
+            }
+        }
+        stage('Login to dockerhub') {
+            steps {
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                    sh 'docker login -u twi5tyx -p ${dockerhubpwd}'
                 }
             }
         }
-        stage('Deploy')  {
+        stage('Upload Image') {
             steps {
-                echo 'Deploying...'
-                withAWS(credentials: 'capstone-credentials', region: eksRegion) {
-                    sh 'aws eks --region=${eksRegion} update-kubeconfig --name ${eksClusterName}'
-                }
+                sh 'make upload'
+            }
+        }
+        stage('Deploy Kubernetes') {
+            steps {
+                sh 'kubectl apply -f ./kubernetes'
             }
         }
     }
