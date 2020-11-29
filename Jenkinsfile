@@ -1,10 +1,15 @@
 pipeline {
     agent any
     stages {
+        stage('Cloning Git') {
+        steps {
+            git 'https://github.com/twistyx-dev/DevOps-Capstone'
+        }
+        }
         stage('Lint') {
             steps {
                 echo 'Linting...'
-                sh 'make lint'
+                sh 'hadolint --ignore DL3013 $WORKSPACE/Dockerfile'
             }
         }
         stage('Build Docker') {
@@ -25,6 +30,12 @@ pipeline {
             steps {
                 echo 'Uploading Image to DockerHub...'
                 sh 'make upload'
+            }
+        }
+        stage('Remove Image from Jenkins') {
+            steps {
+                echo 'Removing Image from Jenkins'
+                sh "docker rmi twi5tyx/capstone:predict"
             }
         }
         stage('Deploy Kubernetes') {
