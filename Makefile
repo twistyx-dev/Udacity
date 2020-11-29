@@ -6,7 +6,7 @@ setup:
 
 install:
 	# This should be run from inside a virtualenv
-	. devops/bin/activate &&\
+	. capstone/bin/activate &&\
 	pip install --upgrade pip &&\
 	pip install -r requirements.txt
 
