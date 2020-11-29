@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Cloning Git') {
-            steps {
-                git clone 'https://github.com/twistyx-dev/DevOps-Capstone.git'
-            }
-        }
         stage('Lint') {
             steps {
                 echo 'Linting...'
