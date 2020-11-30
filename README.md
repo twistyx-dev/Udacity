@@ -42,5 +42,5 @@ Once your Ansible playbook finishes, go to your Jenkins machine's http://jenkins
 * Connect your jenkins to githubrepo.
 * Run below command from your Jenkins Machine to check your LoadBalancer service and get the external IP for your app.
 $ kubectl get svc
-* From ecs Jenkins terminal, run 'sudo su jenkins' to log in as user. Then run `eksctl create cluster -f cluster.yml` to create cluster.
+* From EC2 Jenkins terminal, run 'sudo su jenkins' to log in as user. Then run `eksctl create cluster -f cluster.yml` to create cluster.
 * Once cluster is built run `kubectl get nodes` to verify nodes are running.
