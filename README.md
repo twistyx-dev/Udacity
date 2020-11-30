@@ -27,18 +27,18 @@ A pre-trained, `sklearn` model that has been trained to predict housing prices i
 
 ### Setup the Environment to Deploy
 
-*Create IAM role with Admin access.
-*Create an AWS EC2 instance for your Jenkins Machine with public ip enabled. (select t2.medium/t3.medium with ubuntu 18.04)
-*Attach the previously created IAM role to your Jenkins machine.
-*Add the public IP of your Jenkins Machine to your /etc/hosts file with name JenkinsMaster 13.24.53.242 JenkinsMaster
-*Login to your Jenkins machine and create default ssh keys for connecting to our Kubernetes cluster nodes.
-*Go to your EC2 instance settings and enable port 8080 in your attached security group.
+* Create IAM role with Admin access.
+* Create an AWS EC2 instance for your Jenkins Machine with public ip enabled. (select t2.medium/t3.medium with ubuntu 18.04)
+* Attach the previously created IAM role to your Jenkins machine.
+* Add the public IP of your Jenkins Machine to your /etc/hosts file with name JenkinsMaster 13.24.53.242 JenkinsMaster
+* Login to your Jenkins machine and create default ssh keys for connecting to our Kubernetes cluster nodes.
+* Go to your EC2 instance settings and enable port 8080 in your attached security group.
 
-###Setting up Jenkins
+### Setting up Jenkins
 
 Once your Ansible playbook finishes, go to your Jenkins machine's http://jenkinsmachinepublicip:8080 for accessing Jenkins Dashboard then:
-*Setup Jenkins with recommended setting and install Blue Ocean plugin.
-*Add your docker hub credentials in Jenkins.
-*Connect your jenkins to githubrepo.
-*Run below command from your Jenkins Machine to check your LoadBalancer service and get the external IP for your app.
+* Setup Jenkins with recommended setting and install Blue Ocean plugin.
+* Add your docker hub credentials in Jenkins.
+* Connect your jenkins to githubrepo.
+* Run below command from your Jenkins Machine to check your LoadBalancer service and get the external IP for your app.
 $ kubectl get svc
